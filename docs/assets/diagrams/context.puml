@@ -1,0 +1,13 @@
+@startuml context
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
+
+left to right direction
+LAYOUT_WITH_LEGEND()
+
+Person(user, "Cliente", "Um usuário do sistema que busca gerar uma URL encurtada")
+System(hobbitly, "Hobbitly", "Salva endereço original e gera URLs encurtadas para compartilhar pela Internet")
+System_Ext(sites, "Sites e Recursos da Internet", "Redireciona para o recurso original depois de um usuário utilizar a URL encurtada")
+
+Rel(user, hobbitly, "Envia URL original para gerar um link encurtado no")
+Rel(hobbitly, sites, "Recebe a chamada da URL encurtada e redireciona para")
+@enduml

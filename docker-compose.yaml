@@ -1,0 +1,9 @@
+version: "3"
+services:
+  plantuml:
+    build:
+      context: ./docs
+    image: hobbitly/plantuml-cli
+    container_name: plantuml_cli
+    volumes:
+      - ./docs/assets:/usr/docs/assets
