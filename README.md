@@ -4,17 +4,6 @@ Esse projeto foi pensado para colocar em prática o desenvolvimento de um sistem
 vai evoluindo com o tempo, implementando novos procedimentos, boas práticas e tecnologias utilizadas em cases de alta demanda.
 
 
-## Tecnologias utilizadas
-
-- Python 3.9
-- FastAPI
-- SQL Alchemy
-- Alembic
-- PostgreSQL
-- Nginx
-- Lets Encrypt
-- Docker
-
 ## O que é um encurtador de URLs?
 
 Na Internet lidamos com os links e as conhecidas URLs, que é o endereço no qual identifica em qual site desejamos acessar. Nos deparamos
@@ -49,3 +38,16 @@ O que um sistema que encurta URLs espera dele é que efetue o seguinte:
 o usuário será redirecionado para o destino, representado pela URL original.
 
 ![General View](./docs/assets/images/context.png)
+
+## Tecnologias utilizadas
+
+O sistema é desenvolvido com as seguintes ferramentas:
+
+- Python 3.9
+- React
+- FastAPI
+- SQL Alchemy
+- Alembic
+- PostgreSQL
+
+![Container View](./docs/assets/images/system.png)
