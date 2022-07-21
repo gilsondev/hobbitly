@@ -1,6 +1,7 @@
 @startuml system
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 !$ICONURL = "https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.4.0"
+!include $ICONURL/devicons/nginx.puml
 !include $ICONURL/devicons/python.puml
 !include $ICONURL/devicons/react.puml
 !include $ICONURL/devicons/postgresql.puml
@@ -14,13 +15,17 @@ Person(user, "Cliente", "Um usuário que deseja encurtar um endereço de um site
 System_Ext(sites, "Sites e Recursos da Internet", "Redireciona para o recurso original depois de um usuário utilizar a URL encurtada")
 
 System_Boundary(hobbitly, "Hobbitly") {
+    Container(nginx, "Web Application", "Nginx", "Entrega o conteúdo estático da aplicação", $sprite = "nginx")
     Container(frontend, "Single Page Application", "Javascript/React", "Disponibiliza interface para criação da URL encurtada", $sprite = "react")
 
+    Container(nginx_proxy, "Reverse Proxy", "Nginx", "Recebe os pedidos da interface e envia para a aplicação", $sprite = "nginx")
     Container(api, "API Application", "Python/FastAPI", "Cria links encurtados e redireciona para o destino", $sprite = "python")
     ContainerDb(api_db, "API Database", "PostgreSQL", "Armazena os dados dos anúncios processados", $sprite = "postgresql")
 
-    Rel(user, frontend, "Envia a URL original para gerar link encurtado", "HTTPS")
-    Rel(frontend, api, "Envia o pedido de nova URL encurtada em", "HTTPS/JSON")
+    Rel(user, nginx, "Envia a URL original para gerar link encurtado", "HTTPS")
+    Rel(nginx, frontend, "Entrega ao navegador do cliente", "HTTPS")
+    Rel(frontend, nginx_proxy, "Envia o pedido de nova URL encurtada em", "HTTPS/JSON")
+    Rel(nginx_proxy, api, "Redireciona a requisição para a instância disponível da", "TCP/UVICORN")
     Rel(api, api_db, "Consulta links originais com base no identificador", "TCP")
     Rel(api, sites, "Identifica o endereço de destino com a URL encurtada e redireciona para", "HTTPS")
 }
