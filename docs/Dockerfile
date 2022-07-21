@@ -15,4 +15,4 @@ RUN ["dot", "-version"]
 VOLUME ["/usr/docs/assets"]
 
 ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "plantuml.jar"]
-CMD ["-tpng"]
+CMD ["-tsvg"]

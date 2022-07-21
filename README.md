@@ -37,7 +37,7 @@ O que um sistema que encurta URLs espera dele é que efetue o seguinte:
 4. Com esse novo link, quando o usuário irá utilizá-lo, o sistema vai reconhecer o identificador, e com isso
 o usuário será redirecionado para o destino, representado pela URL original.
 
-![General View](./docs/assets/diagrams/context.png)
+![General View](./docs/assets/diagrams/context.svg)
 
 ## Tecnologias utilizadas
 
@@ -50,4 +50,4 @@ O sistema é desenvolvido com as seguintes ferramentas:
 - Alembic
 - PostgreSQL
 
-![Container View](./docs/assets/diagrams/system.png)
+![Container View](./docs/assets/diagrams/hobbitly-system.svg)

@@ -5,6 +5,7 @@ left to right direction
 LAYOUT_WITH_LEGEND()
 
 Person(user, "Cliente", "Um usuário do sistema que busca gerar uma URL encurtada")
+
 System(hobbitly, "Hobbitly", "Salva endereço original e gera URLs encurtadas para compartilhar pela Internet")
 System_Ext(sites, "Sites e Recursos da Internet", "Redireciona para o recurso original depois de um usuário utilizar a URL encurtada")
 
