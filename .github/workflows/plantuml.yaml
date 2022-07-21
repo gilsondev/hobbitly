@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Export PlantUML diagrams
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: plantuml
+      - name: Render PlantUML
         id: plantuml
         uses: grassedge/generate-plantuml-action@v1.5
         with:

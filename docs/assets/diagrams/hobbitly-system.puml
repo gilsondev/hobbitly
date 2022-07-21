@@ -3,7 +3,6 @@
 !$ICONURL = "https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.4.0"
 !include $ICONURL/devicons/python.puml
 !include $ICONURL/devicons/react.puml
-!include $ICONURL/devicons/mongodb.puml
 !include $ICONURL/devicons/postgresql.puml
 
 AddRelTag("async", $lineStyle = DashedLine())
