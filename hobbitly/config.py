@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     port: str = config("PORT", default="8000")
     log_level: str = config("LOG_LEVEL", default="info")
     reload: bool = config("RELOAD", default=False, cast=bool)
+    database_url: str = config("DATABASE_URL", default="sqlite://")
+    db_echo: bool = True if config("DEBUG") else False
     cors_origins: List[str] = config("CORS_ORIGIN", cast=Csv())
     cors_allow_credentials: bool = config(
         "CORS_ALLOW_CREDENTIALS", default=False, cast=bool

@@ -1,5 +1,31 @@
 version: "3"
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hobbitly/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/hobbitly
+    volumes:
+      - .:/home/app
+    depends_on:
+      - db
+
+  db:
+    build: postgres
+    image: hobbitly/postgres
+    volumes:
+      - $HOME/.postgres/hobbitly/data/postgresql:/var/lib/postgresql/data
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_DBS=hobbitly, hobbitly_test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
   plantuml:
     build:
       context: ./docs
