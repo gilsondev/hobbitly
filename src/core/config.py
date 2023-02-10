@@ -34,7 +34,7 @@ class Settings(BaseSettings):
             "openapi_url": self.OPENAPI_URL,
             "title": self.TITLE,
             "version": self.VERSION,
-            "description": "API REST of project Checkstatus .gov.br",
+            "description": "API REST of project Hobbitly",
             "contact": {
                 "name": "Gilson Filho",
                 "url": "https://gilsondev.in",
