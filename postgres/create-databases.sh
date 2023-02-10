@@ -15,7 +15,7 @@ EOSQL
 
 if [ -n "$POSTGRES_DBS" ]; then
 	echo "Creating DB(s): $POSTGRES_DBS"
-	for db in $(echo $POSTGRES_DBS | tr ',' ' '); do
+	for db in $(echo $POSTGRES_DBS | tr "," " "); do
 		create_user_and_database $db
 	done
 	echo "Multiple databases created"

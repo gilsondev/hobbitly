@@ -1,25 +1,38 @@
 [tool.poetry]
 name = "hobbitly"
 version = "0.1.0"
-description = "Um simples, mas honesto encurtador de URLs"
+description = "Um encurtador de URLs para aplicar inúmeros conceitos de desenvolvimento, arquitetura e design systems"
 authors = ["Gilson Filho <me@gilsondev.in>"]
-license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/gilsondev/hobbitly"
+repository = "https://github.com/gilsondev/hobbitly"
+packages = [{ include = "src" }]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/gilsondev/hobbitly/issues"
+
 
 [tool.poetry.dependencies]
-python = "^3.9"
-fastapi = "^0.79.0"
-uvicorn = "^0.18.2"
-python-decouple = "^3.6"
-sqlmodel = "^0.0.6"
-alembic = "^1.8.1"
+python = "^3.10"
+fastapi = "^0.90.1"
+uvicorn = "^0.20.0"
+sqlmodel = "^0.0.8"
+alembic = "^1.9.3"
+psycopg2-binary = "^2.9.5"
+pydantic = "^1.10.4"
+typer = "^0.7.0"
 
-[tool.poetry.dev-dependencies]
-requests = "^2.28.1"
-pytest = "^7.1.2"
-gitchangelog = "^3.0.4"
-flake8 = "^4.0.1"
-black = "^22.6.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+black = "^23.1.0"
+pytest-cov = "^4.0.0"
+flake8 = "^6.0.0"
+ipython = "^8.10.0"
+
+[tool.poetry.scripts]
+hobbitly = "src.cli:main"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

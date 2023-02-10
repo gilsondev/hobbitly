@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.15
+FROM python:3.10-alpine as hobbitly-base
 
 ENV PYTHONUNBUFFERED 1
 ENV PIP_TIMEOUT 60
@@ -23,8 +23,20 @@ COPY . ${APP_HOME}
 RUN chown -R app:app ${APP_HOME}
 
 RUN poetry config virtualenvs.create false
+
+FROM hobbitly-base as hobbitly-dev
+
+RUN poetry install
+
+USER app
+
+CMD ["uvicorn", "src.app:app", "--host=0.0.0.0", "--port=8000", "--reload"]
+
+FROM hobbitly-base as hobbitly
+
 RUN poetry install --no-dev
 
 USER app
 
-CMD ["uvicorn", "hobbitly.app:app", "--host=0.0.0.0","--port=8000","--reload"]
+CMD ["uvicorn", "src.app:app", "--host=0.0.0.0", "--port=8000"]
+

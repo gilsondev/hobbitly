@@ -46,8 +46,8 @@ O sistema é desenvolvido com as seguintes ferramentas:
 - Python 3.9
 - React
 - FastAPI
-- SQL Alchemy
+- SQL Model
 - Alembic
 - PostgreSQL
 
-![Container View](./docs/assets/diagrams/hobbitly-system.svg)
+![Container View](./docs/assets/diagrams/system.svg)

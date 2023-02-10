@@ -1,2 +1,2 @@
-FROM postgres:alpine3.16
+FROM postgres:alpine
 COPY create-databases.sh /docker-entrypoint-initdb.d/

@@ -1,44 +1,41 @@
+import os
+
 import pytest
-import warnings
-import alembic
-
 from fastapi.testclient import TestClient
-from alembic.config import Config
-from sqlalchemy.engine.base import Connection
-from sqlalchemy.orm import scoped_session
-from sqlalchemy.orm.session import sessionmaker
-from sqlmodel import create_engine
+from sqlmodel import Session, create_engine
 
-from hobbitly.app import app
-from hobbitly.config import settings
+from src import models
+from src.app import app
+from src.core.config import settings
+from src.core.database import get_session
 
-
-@pytest.fixture(scope="session")
-def client():
-    return TestClient(app)
+os.environ["DATABASE_URL"] = "postgres://postgres:postgres@localhost:5435/hobbitly_test"
 
 
 @pytest.fixture(scope="session")
-def apply_migrations():
-    warnings.filterwarnings("ignore", category=DeprecationWarning)
-    config = Config("alembic.ini")
-
-    alembic.command.upgrade(config, "head")
-    yield
-    alembic.command.downgrade(config, "base")
+def engine():
+    return create_engine(settings.DATABASE_URL)
 
 
 @pytest.fixture(scope="session")
-def db_connection():
-    engine = create_engine(f"{settings.database_url}_test")
-    return engine.connect()
+def database(engine):
+    models.SQLModel.metadata.create_all(engine)
+    yield engine
+    models.SQLModel.metadata.drop_all(engine)
 
 
-@pytest.fixture(scope="session")
-def db_session(db_connection: Connection):
-    transaction = db_connection.begin()
+@pytest.fixture(scope="function")
+def db_session(database):
+    session = Session(database)
+    yield session
+    session.close()
 
-    yield scoped_session(
-        sessionmaker(autocommit=False, autoflush=False, bind=db_connection)
-    )
-    transaction.rollback()
+
+@pytest.fixture(scope="function")
+def client(db_session):
+    def _get_session_override():
+        return db_session
+
+    app.dependency_overrides[get_session] = _get_session_override
+    with TestClient(app) as test_client:
+        yield test_client

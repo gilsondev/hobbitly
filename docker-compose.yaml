@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: hobbitly-dev
     image: hobbitly/app
     ports:
       - "8000:8000"
