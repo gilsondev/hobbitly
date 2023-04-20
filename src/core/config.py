@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     ALLOWED_HOSTS: List[str] = ["*"]
     ALLOWED_METHODS: List[str] = ["*"]
     ALLOWED_HEADERS: List[str] = ["*"]
+    SITE_URL = "http://localhost:8000"
 
     API_PREFIX: str = "/api"
     DOCS_URL: str = "/docs"
@@ -22,6 +23,8 @@ class Settings(BaseSettings):
     DATABASE_URL: Union[
         PostgresDsn, str
     ] = "postgresql://postgres:postgres@localhost:5435/hobbitly"
+
+    SHORT_ID_SIZE: int = 8
 
     class Config:
         env_file = ".env"

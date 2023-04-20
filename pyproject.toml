@@ -29,6 +29,8 @@ black = "^23.1.0"
 pytest-cov = "^4.0.0"
 flake8 = "^6.0.0"
 ipython = "^8.10.0"
+httpx = "^0.24.0"
+pytest-mock = "^3.10.0"
 
 [tool.poetry.scripts]
 hobbitly = "src.cli:main"
